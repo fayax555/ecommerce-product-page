@@ -63,15 +63,10 @@ const ImageSlider = () => {
 }
 
 const Wrapper = styled('div', {
-  minHeight: '320px',
+  minHeight: '310px',
   width: '502px',
   margin: '0 auto',
   border: '1px solid #000',
-
-  '& > section': {
-    marginTop: '1rem',
-    textAlign: 'center',
-  },
 })
 
 const SlideBoxWrapper = styled('div', {

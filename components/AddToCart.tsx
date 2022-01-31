@@ -1,12 +1,27 @@
-import { styled } from '@stitches/react'
+import { useState } from 'react'
+import { styled } from 'stitches.config'
+import { useCartContext } from 'contexts/CartContext'
 
 const AddToCart = () => {
+  const { setCartQty } = useCartContext()
+  const [qty, setQty] = useState(0)
+
   return (
     <div>
       <div>
-        <button>-</button> <span>0</span> <button>+</button>
+        <button disabled={qty === 0} onClick={() => setQty(qty - 1)}>
+          -
+        </button>{' '}
+        <span>{qty}</span> <button onClick={() => setQty(qty + 1)}>+</button>
       </div>
-      <AddToCartButton>Add to cart</AddToCartButton>
+      <AddToCartButton
+        onClick={() => {
+          setCartQty((currQty) => currQty + qty)
+          setQty(0)
+        }}
+      >
+        Add to cart
+      </AddToCartButton>
     </div>
   )
 }

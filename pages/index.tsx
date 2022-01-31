@@ -2,7 +2,7 @@ import Head from 'next/head'
 import type { NextPage } from 'next'
 import ProductDetails from 'components/ProductDetails'
 import AddToCart from 'components/AddToCart'
-import { styled } from '@stitches/react'
+import { styled } from 'stitches.config'
 import ImageSlider from 'components/ImageSlider'
 
 const Home: NextPage = () => {
