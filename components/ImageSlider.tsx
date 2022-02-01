@@ -82,11 +82,7 @@ const ImageSlider = () => {
   )
 }
 
-const Wrapper = styled('div', {
-  minHeight: '310px',
-  maxWidth: '502px',
-  margin: '0 auto',
-})
+const Wrapper = styled('div', {})
 
 const SlideBoxWrapper = styled('div', {
   overflow: 'hidden',
@@ -95,7 +91,7 @@ const SlideBoxWrapper = styled('div', {
 })
 
 const SlideBox = styled('div', {
-  height: '300px',
+  height: 'clamp(300px, 60vw, 500px)',
   display: 'flex',
   transition: '0.3s ease',
 })
@@ -127,11 +123,13 @@ const Button = styled('button', {
 })
 
 const Prev = styled(Button, {
-  left: '0',
+  top: '40%',
+  left: '10px',
 })
 
 const Next = styled(Button, {
-  right: '0',
+  top: '40%',
+  right: '10px',
 })
 
 export default ImageSlider

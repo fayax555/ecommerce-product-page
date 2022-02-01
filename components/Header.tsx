@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <nav>
-        <NavLinks move={move} />
+        {/* <NavLinks move={move} /> */}
         {!isMenuOpen ? (
           <MenuSvg
             onClick={() => {
