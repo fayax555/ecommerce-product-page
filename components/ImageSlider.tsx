@@ -1,41 +1,61 @@
 import { useState, useEffect } from 'react'
-import { styled, keyframes } from '@stitches/react'
+import { styled } from '@stitches/react'
 import Image from 'next/image'
+import { useMeasure } from 'react-use'
 
 const ImageSlider = () => {
-  const [move, setMove] = useState(0)
+  const [count, setCount] = useState(0)
+  const [ref, { width, height }] = useMeasure<HTMLDivElement>()
+
+  const handleLeft = () => {
+    if (count > 0) {
+      setCount((curr) => curr - 1)
+    }
+  }
+
+  const handleRight = () => {
+    if (count < 3) {
+      setCount(count + 1)
+    }
+  }
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft')
-        setMove((move) => (move <= -300 ? move + 300 : move))
-      if (e.key === 'ArrowRight')
-        setMove((move) => (move >= -600 ? move - 300 : move))
+      if (e.key === 'ArrowLeft') handleLeft()
+      if (e.key === 'ArrowRight') handleRight()
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, count])
 
   return (
     <Wrapper>
-      <SlideBoxWrapper>
-        <SlideBox style={{ transform: `translateX(${move}px)` }}>
+      <SlideBoxWrapper ref={ref}>
+        <SlideBox
+          style={{
+            transform: `translateX(${count * -width}px)`,
+            width: `${width * 4}px`,
+            left: 0,
+          }}
+        >
           {Array(4)
             .fill(0)
             .map((_, i) => (
               <ImageWrapper key={i}>
                 <Image
-                  width={300}
-                  height={300}
+                  width={width}
+                  height={height}
                   src={`/images/image-product-${i + 1}.jpg`}
                   alt=''
                   priority={true}
+                  loading='eager'
                 />
               </ImageWrapper>
             ))}
         </SlideBox>
-        <Prev onClick={() => move <= -300 && setMove(move + 300)}>
+        <Prev onClick={() => handleLeft()}>
           <svg width='12' height='18' xmlns='http://www.w3.org/2000/svg'>
             <path
               d='M11 1 3 9l8 8'
@@ -46,7 +66,7 @@ const ImageSlider = () => {
             />
           </svg>
         </Prev>
-        <Next onClick={() => move >= -600 && setMove(move - 300)}>
+        <Next onClick={() => handleRight()}>
           <svg width='13' height='18' xmlns='http://www.w3.org/2000/svg'>
             <path
               d='m2 1 8 8-8 8'
@@ -66,30 +86,25 @@ const Wrapper = styled('div', {
   minHeight: '310px',
   maxWidth: '502px',
   margin: '0 auto',
-  border: '1px solid #000',
 })
 
 const SlideBoxWrapper = styled('div', {
-  border: '2px solid #421515',
   overflow: 'hidden',
-  width: '302px',
   margin: '0 auto',
   position: 'relative',
 })
 
 const SlideBox = styled('div', {
   height: '300px',
-  width: '1220px',
   display: 'flex',
   transition: '0.3s ease',
 })
 
 const ImageWrapper = styled('div', {
-  width: '300px',
+  position: 'relative',
 })
 
 const Button = styled('button', {
-  // textAlign: 'center',
   transform: 'scale(0.8)',
   display: 'grid',
   justifyContent: 'center',

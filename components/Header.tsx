@@ -49,7 +49,7 @@ const Header = () => {
         )}
         {/* {!isMenuOpen && ( */}
         <Brand>
-          <Image src='/images/logo.svg' width={100} height={15} alt='logo' />
+          <Image src='/images/logo.svg' width={135} height={20} alt='logo' />
         </Brand>
         {/* )} */}
       </nav>
@@ -59,8 +59,8 @@ const Header = () => {
             onClick={() => setIsCartOpen((curr) => !curr)}
             className='cart-icon'
             src='/images/icon-cart.svg'
-            height={25}
-            width={25}
+            height={20}
+            width={22}
             alt='cart button'
           />
         </CartIcon>
@@ -69,8 +69,8 @@ const Header = () => {
           <Image
             src='/images/image-avatar.png'
             alt='avatar'
-            width={25}
-            height={25}
+            width={24}
+            height={24}
           />
         </Avatar>
       </ImageWrapper>
@@ -87,6 +87,11 @@ const StyledHeader = styled('header', {
   alignItems: 'center',
   borderBottom: '1px solid #ccc',
   padding: '0 24px',
+
+  '& > nav': {
+    display: 'flex',
+    alignItems: 'center',
+  },
 })
 
 const MenuSvg = styled('svg', {
@@ -101,11 +106,12 @@ const CloseSvg = styled(MenuSvg, {})
 const Brand = styled('a', {
   userSelect: 'none',
   position: 'absolute',
-  transform: 'translateX(40px)',
+  transform: 'translateX(33px)',
 })
 
 const ImageWrapper = styled('div', {
   display: 'flex',
+  alignItems: 'center',
 })
 
 const CartIcon = styled('div', {
@@ -117,8 +123,6 @@ const CartIcon = styled('div', {
 const Avatar = styled('div', {
   cursor: 'pointer',
   borderRadius: '50%',
-  width: '25px',
-  height: '25px',
 
   '&:hover': {
     outline: '2px solid orange',
