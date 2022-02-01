@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { styled } from 'stitches.config'
 import NavLinks from './NavLinks'
 import Cart from './Cart'
+import { useCartContext } from 'contexts/CartContext'
+import Image from 'next/image'
 
 const Header = () => {
+  const { isCartOpen, setIsCartOpen } = useCartContext()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isCartOpen, setIsCartOpen] = useState(false)
   const [move, setMove] = useState(-108)
 
   return (
@@ -45,38 +47,82 @@ const Header = () => {
             />
           </CloseSvg>
         )}
-        <Brand>{!isMenuOpen ? 'sneakers' : ''}</Brand>
+        {/* {!isMenuOpen && ( */}
+        <Brand>
+          <Image src='/images/logo.svg' width={100} height={15} alt='logo' />
+        </Brand>
+        {/* )} */}
       </nav>
-      <div>
-        <button onClick={() => setIsCartOpen(!isCartOpen)}>Cart Icon</button>
+      <ImageWrapper>
+        <CartIcon>
+          <Image
+            onClick={() => setIsCartOpen((curr) => !curr)}
+            className='cart-icon'
+            src='/images/icon-cart.svg'
+            height={25}
+            width={25}
+            alt='cart button'
+          />
+        </CartIcon>
         {isCartOpen && <Cart />}
-        <button>Profile</button>
-      </div>
+        <Avatar>
+          <Image
+            src='/images/image-avatar.png'
+            alt='avatar'
+            width={25}
+            height={25}
+          />
+        </Avatar>
+      </ImageWrapper>
     </StyledHeader>
   )
 }
 
 const StyledHeader = styled('header', {
   maxWidth: '800px',
+  height: '68px',
   margin: 'auto',
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'center',
   borderBottom: '1px solid #ccc',
-  padding: '10px',
+  padding: '0 24px',
 })
 
 const MenuSvg = styled('svg', {
+  position: 'absolute',
+  width: '16px',
   cursor: 'pointer',
-  marginRight: '20px',
+  zIndex: '2',
 })
 
 const CloseSvg = styled(MenuSvg, {})
 
 const Brand = styled('a', {
-  fontSize: '1.4rem',
-  fontWeight: 'bold',
-  marginRight: '20px',
+  userSelect: 'none',
+  position: 'absolute',
+  transform: 'translateX(40px)',
+})
+
+const ImageWrapper = styled('div', {
+  display: 'flex',
+})
+
+const CartIcon = styled('div', {
+  all: 'unset',
   cursor: 'pointer',
+  marginRight: '20px',
+})
+
+const Avatar = styled('div', {
+  cursor: 'pointer',
+  borderRadius: '50%',
+  width: '25px',
+  height: '25px',
+
+  '&:hover': {
+    outline: '2px solid orange',
+  },
 })
 
 export default Header

@@ -1,14 +1,28 @@
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { styled } from 'stitches.config'
 import { useCartContext } from 'contexts/CartContext'
-
-interface Props {}
+import { styled } from 'stitches.config'
 
 const Cart = () => {
-  const { cartQty, setCartQty } = useCartContext()
+  const { cartQty, setCartQty, setIsCartOpen } = useCartContext()
+  const wrapperRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      if (
+        !wrapperRef.current?.contains(e.target) &&
+        e.target.className !== 'cart-icon'
+      ) {
+        setIsCartOpen(false)
+      }
+    }
+
+    window.addEventListener('mousedown', handleClickOutside)
+    return () => window.removeEventListener('mousedown', handleClickOutside)
+  }, [setIsCartOpen])
 
   return (
-    <Wrapper>
+    <Wrapper ref={wrapperRef}>
       <h2>Cart</h2>
       {cartQty ? (
         <Content>

@@ -5,13 +5,13 @@ interface Props {}
 const ProductDetails = () => {
   return (
     <Wrapper>
-      <p>Sneaker Company</p>
+      <BrandName>Sneaker Company</BrandName>
       <Title>Fall Limited Edition Sneakers</Title>
-      <p>
+      <Text>
         These low-profile sneakers are your perfect casual wear companion.
         Featuring a durable rubber outer sole, they’ll withstand everything the
         weather can offer.
-      </p>
+      </Text>
       <PriceWrapper>
         <p>$125.00</p>
         <p>50%</p>
@@ -28,12 +28,32 @@ const Title = styled('h1', {
   paddingBottom: '10px',
 })
 
+const BrandName = styled('p', {
+  color: '$orange',
+})
+
+const Text = styled('p', {
+  color: '$darkGrayishBlue',
+})
+
 const PriceWrapper = styled('div', {
   display: 'flex',
   gap: '10px',
   padding: '10px',
+
+  '& > p:nth-child(1)': {
+    color: '$veryDarkBlue',
+    fontSize: '1.4rem',
+    fontWeight: '$bold',
+  },
+
+  '& > p:nth-child(2)': {
+    color: '$orange',
+    backgroundColor: '$paleOrange',
+  },
+
   '& > del': {
-    color: '#ccc',
+    color: '$grayishBlue',
     marginLeft: 'auto',
   },
 })

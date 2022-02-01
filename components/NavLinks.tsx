@@ -20,7 +20,7 @@ const Wrapper = styled('div', {
   backgroundColor: 'lightBlue',
   padding: '1rem',
   position: 'absolute',
-  zIndex: '-1',
+  zIndex: '1',
   transition: '0.1s ease-in-out',
 })
 

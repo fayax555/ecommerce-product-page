@@ -64,7 +64,7 @@ const ImageSlider = () => {
 
 const Wrapper = styled('div', {
   minHeight: '310px',
-  width: '502px',
+  maxWidth: '502px',
   margin: '0 auto',
   border: '1px solid #000',
 })

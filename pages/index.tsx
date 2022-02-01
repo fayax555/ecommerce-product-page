@@ -25,6 +25,7 @@ const Home: NextPage = () => {
 const Main = styled('main', {
   maxWidth: '800px',
   margin: 'auto',
+  padding: '0 1rem'
 })
 
 export default Home
