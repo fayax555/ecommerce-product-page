@@ -8,18 +8,14 @@ import Image from 'next/image'
 const Header = () => {
   const { isCartOpen, setIsCartOpen } = useCartContext()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [move, setMove] = useState(-108)
 
   return (
     <StyledHeader>
       <nav>
-        {/* <NavLinks move={move} /> */}
+        <NavLinks {...{ isMenuOpen, setIsMenuOpen }} />
         {!isMenuOpen ? (
           <MenuSvg
-            onClick={() => {
-              setIsMenuOpen(true)
-              setMove(-8)
-            }}
+            onClick={() => setIsMenuOpen(true)}
             width='16'
             height='15'
             xmlns='http://www.w3.org/2000/svg'
@@ -32,10 +28,7 @@ const Header = () => {
           </MenuSvg>
         ) : (
           <CloseSvg
-            onClick={() => {
-              setIsMenuOpen(false)
-              setMove(-108)
-            }}
+            onClick={() => setIsMenuOpen(false)}
             width='14'
             height='15'
             xmlns='http://www.w3.org/2000/svg'
@@ -47,11 +40,9 @@ const Header = () => {
             />
           </CloseSvg>
         )}
-        {/* {!isMenuOpen && ( */}
         <Brand>
           <Image src='/images/logo.svg' width={135} height={20} alt='logo' />
         </Brand>
-        {/* )} */}
       </nav>
       <ImageWrapper>
         <CartIcon>
