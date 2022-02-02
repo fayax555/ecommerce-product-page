@@ -1,25 +1,21 @@
 import { styled } from 'stitches.config'
 
-interface Props {}
-
-const ProductDetails = () => {
-  return (
-    <Wrapper>
-      <BrandName>SNEAKER COMPANY</BrandName>
-      <Title>Fall Limited Edition Sneakers</Title>
-      <Text>
-        These low-profile sneakers are your perfect casual wear companion.
-        Featuring a durable rubber outer sole, they’ll withstand everything the
-        weather can offer.
-      </Text>
-      <PriceWrapper>
-        <p>$125.00</p>
-        <p>50%</p>
-        <del>$250.00</del>
-      </PriceWrapper>
-    </Wrapper>
-  )
-}
+const ProductDetails = () => (
+  <Wrapper>
+    <BrandName>SNEAKER COMPANY</BrandName>
+    <Title>Fall Limited Edition Sneakers</Title>
+    <Text>
+      These low-profile sneakers are your perfect casual wear companion.
+      Featuring a durable rubber outer sole, they’ll withstand everything the
+      weather can offer.
+    </Text>
+    <PriceWrapper>
+      <p>$125.00</p>
+      <p>50%</p>
+      <del>$250.00</del>
+    </PriceWrapper>
+  </Wrapper>
+)
 
 const Wrapper = styled('section', {
   padding: '24px',
@@ -71,6 +67,15 @@ const PriceWrapper = styled('div', {
   '& > del': {
     color: '$grayishBlue',
     marginLeft: 'auto',
+
+    '@bp1': {
+      marginLeft: 'revert',
+    },
+  },
+
+  '@bp1': {
+    width: '220px',
+    flexWrap: 'wrap',
   },
 })
 

@@ -1,22 +1,18 @@
 import { useState, useEffect } from 'react'
-import { styled } from '@stitches/react'
+import { styled } from 'stitches.config'
 import Image from 'next/image'
 import { useMeasure } from 'react-use'
 
 const ImageSlider = () => {
-  const [count, setCount] = useState(0)
   const [ref, { width, height }] = useMeasure<HTMLDivElement>()
+  const [count, setCount] = useState(0)
 
   const handleLeft = () => {
-    if (count > 0) {
-      setCount((curr) => curr - 1)
-    }
+    if (count > 0) setCount((curr) => curr - 1)
   }
 
   const handleRight = () => {
-    if (count < 3) {
-      setCount(count + 1)
-    }
+    if (count < 3) setCount(count + 1)
   }
 
   useEffect(() => {
@@ -48,7 +44,7 @@ const ImageSlider = () => {
                   width={width}
                   height={height}
                   src={`/images/image-product-${i + 1}.jpg`}
-                  alt=''
+                  alt={`image-product-${i + 1}`}
                   priority={true}
                   loading='eager'
                 />
@@ -78,16 +74,64 @@ const ImageSlider = () => {
           </svg>
         </Next>
       </SlideBoxWrapper>
+      <ThumbnailListWrapper>
+        {Array(4)
+          .fill(0)
+          .map((_, i) => (
+            <ThumbnailWrapper
+              key={i}
+              onClick={() => {
+                setCount(i)
+              }}
+              css={{
+                outline: count === i ? '$orange 3px solid' : 'none',
+              }}
+            >
+              <Image
+                layout='fill'
+                objectFit='initial'
+                src={`/images/image-product-${i + 1}-thumbnail.jpg`}
+                alt={`image-product-${i + 1}-thumbnail`}
+              />
+            </ThumbnailWrapper>
+          ))}
+      </ThumbnailListWrapper>
     </Wrapper>
   )
 }
 
 const Wrapper = styled('div', {})
 
+const ThumbnailListWrapper = styled('div', {
+  display: 'flex',
+  gap: '5px',
+  justifyContent: 'space-between',
+  paddingTop: '10px',
+})
+
+const ThumbnailWrapper = styled('div', {
+  position: 'relative',
+  width: '100px',
+  height: '100px',
+  cursor: 'pointer',
+  borderRadius: '11px',
+
+  '& img': {
+    display: 'block',
+    borderRadius: '10px',
+    borderImageWidth: '25px solid #444',
+  },
+})
+
 const SlideBoxWrapper = styled('div', {
   overflow: 'hidden',
   margin: '0 auto',
   position: 'relative',
+
+  '@bp1': {
+    borderRadius: '10px',
+    cursor: 'pointer',
+  },
 })
 
 const SlideBox = styled('div', {
@@ -119,6 +163,10 @@ const Button = styled('button', {
     '& > svg': {
       color: 'orange',
     },
+  },
+
+  '@bp1': {
+    display: 'none',
   },
 })
 

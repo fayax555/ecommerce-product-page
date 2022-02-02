@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { styled } from 'stitches.config'
-import NavLinks from './NavLinks'
+import Menu from './Menu'
 import Cart from './Cart'
 import { useCartContext } from 'contexts/CartContext'
 import Image from 'next/image'
+import NavLinks from './NavLinks'
 
 const Header = () => {
   const { isCartOpen, setIsCartOpen } = useCartContext()
@@ -12,7 +13,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <nav>
-        <NavLinks {...{ isMenuOpen, setIsMenuOpen }} />
+        <Menu {...{ isMenuOpen, setIsMenuOpen }} />
         {!isMenuOpen ? (
           <MenuSvg
             onClick={() => setIsMenuOpen(true)}
@@ -43,6 +44,7 @@ const Header = () => {
         <Brand>
           <Image src='/images/logo.svg' width={135} height={20} alt='logo' />
         </Brand>
+        <NavLinks />
       </nav>
       <ImageWrapper>
         <CartIcon>
@@ -83,6 +85,10 @@ const StyledHeader = styled('header', {
     display: 'flex',
     alignItems: 'center',
   },
+
+  '@bp1': {
+    maxWidth: '1264px',
+  },
 })
 
 const MenuSvg = styled('svg', {
@@ -90,6 +96,10 @@ const MenuSvg = styled('svg', {
   width: '16px',
   cursor: 'pointer',
   zIndex: '2',
+
+  '@bp1': {
+    display: 'none',
+  },
 })
 
 const CloseSvg = styled(MenuSvg, {})
@@ -98,6 +108,11 @@ const Brand = styled('a', {
   userSelect: 'none',
   position: 'absolute',
   transform: 'translateX(33px)',
+
+  '@bp1': {
+    position: 'revert',
+    transform: 'revert',
+  },
 })
 
 const ImageWrapper = styled('div', {

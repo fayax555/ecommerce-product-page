@@ -15,8 +15,10 @@ const Home: NextPage = () => {
       </Head>
       <Main>
         <ImageSlider />
-        <ProductDetails />
-        <AddToCart />
+        <div>
+          <ProductDetails />
+          <AddToCart />
+        </div>
       </Main>
     </div>
   )
@@ -25,6 +27,14 @@ const Home: NextPage = () => {
 const Main = styled('main', {
   maxWidth: '800px',
   margin: 'auto',
+
+  '@bp1': {
+    maxWidth: '1264px',
+    display: 'grid',
+    gridTemplateColumns: 'minmax(auto, 506px) minmax(auto, 506px)',
+    justifyContent: 'space-between',
+    padding: '56px',
+  },
 })
 
 export default Home

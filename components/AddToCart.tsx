@@ -67,9 +67,12 @@ const AddToCart = () => {
 const Wrapper = styled('div', {
   padding: '0 24px',
   marginBottom: '1rem',
-  display: 'flex',
-  flexDirection: 'column',
+  display: 'grid',
   gap: '16px',
+
+  '@bp1': {
+    gridTemplateColumns: '1fr 2fr',
+  },
 })
 
 const CountWrapper = styled('div', {
@@ -86,6 +89,7 @@ const CountWrapper = styled('div', {
     all: 'unset',
     color: '$orange',
     height: '100%',
+    cursor: 'pointer',
   },
 })
 

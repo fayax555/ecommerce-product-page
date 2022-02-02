@@ -30,6 +30,6 @@ export const { getCssText, styled } = createStitches({
     },
   },
   media: {
-    '@bp1': '(min-width: 800px)',
+    bp1: '(min-width: 800px)',
   },
 })
