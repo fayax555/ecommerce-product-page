@@ -66,7 +66,7 @@ const AddToCart = () => {
 
 const Wrapper = styled('div', {
   padding: '0 24px',
-  marginBottom: '1rem',
+  marginBottom: '3rem',
   display: 'grid',
   gap: '16px',
 

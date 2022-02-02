@@ -96,7 +96,7 @@ const Wrapper = styled('section', {
   '@bp1': {
     maxWidth: '400px',
     right: 0,
-    left: '800px',
+    left: 'auto',
   },
 })
 

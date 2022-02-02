@@ -44,7 +44,9 @@ const Header = () => {
         <Brand>
           <Image src='/images/logo.svg' width={135} height={20} alt='logo' />
         </Brand>
-        <NavLinks />
+        <DesktopOnly>
+          <NavLinks />
+        </DesktopOnly>
       </nav>
       <ImageWrapper>
         <CartIcon>
@@ -87,7 +89,15 @@ const StyledHeader = styled('header', {
   },
 
   '@bp1': {
+    position: 'relative',
     maxWidth: '1264px',
+  },
+})
+
+const DesktopOnly = styled('div', {
+  display: 'none',
+  '@bp1': {
+    display: 'revert',
   },
 })
 
@@ -96,6 +106,7 @@ const MenuSvg = styled('svg', {
   width: '16px',
   cursor: 'pointer',
   zIndex: '2',
+  userSelect: 'none',
 
   '@bp1': {
     display: 'none',

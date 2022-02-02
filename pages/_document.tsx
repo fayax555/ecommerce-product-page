@@ -13,6 +13,8 @@ export default class Document extends NextDocument {
         </Head>
         <body>
           <Main />
+          {/* Here we will mount our modal portal */}
+          <div id='modal' />
           <NextScript />
         </body>
       </Html>

@@ -56,10 +56,6 @@ const Overlay = styled('div', {
   zIndex: '1',
   transform: 'translateX(-290px)',
   display: 'grid',
-
-  '@bp1': {
-    display: 'none',
-  },
 })
 
 const Wrapper = styled('div', {

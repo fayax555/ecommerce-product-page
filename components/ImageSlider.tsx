@@ -1,18 +1,23 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 import { styled } from 'stitches.config'
 import Image from 'next/image'
 import { useMeasure } from 'react-use'
 
-const ImageSlider = () => {
+interface Props {
+  isModalOpen?: boolean
+  setIsModalOpen?: Dispatch<SetStateAction<boolean>>
+}
+
+const ImageSlider = ({ isModalOpen, setIsModalOpen }: Props) => {
   const [ref, { width, height }] = useMeasure<HTMLDivElement>()
   const [count, setCount] = useState(0)
 
   const handleLeft = () => {
-    if (count > 0) setCount((curr) => curr - 1)
+    if (count > 0) setCount((c) => c - 1)
   }
 
   const handleRight = () => {
-    if (count < 3) setCount(count + 1)
+    if (count < 3) setCount((c) => c + 1)
   }
 
   useEffect(() => {
@@ -39,7 +44,12 @@ const ImageSlider = () => {
           {Array(4)
             .fill(0)
             .map((_, i) => (
-              <ImageWrapper key={i}>
+              <ImageWrapper
+                key={i}
+                onClick={() =>
+                  !isModalOpen && setIsModalOpen && setIsModalOpen(true)
+                }
+              >
                 <Image
                   width={width}
                   height={height}
@@ -103,10 +113,14 @@ const ImageSlider = () => {
 const Wrapper = styled('div', {})
 
 const ThumbnailListWrapper = styled('div', {
-  display: 'flex',
-  gap: '5px',
-  justifyContent: 'space-between',
-  paddingTop: '10px',
+  display: 'none',
+
+  '@bp1': {
+    display: 'flex',
+    gap: '5px',
+    justifyContent: 'space-between',
+    paddingTop: '10px',
+  },
 })
 
 const ThumbnailWrapper = styled('div', {
