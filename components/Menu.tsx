@@ -29,17 +29,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
   if (!shouldOpen) return null
 
   return (
-    <Overlay
-      css={
-        isMenuOpen
-          ? {
-              transform: 'translateX(0px)',
-              right: '0',
-              width: 'revert',
-            }
-          : undefined
-      }
-    >
+    <Overlay className={isMenuOpen ? 'open' : ''}>
       <Wrapper ref={wrapperRef}>
         <NavLinks />
       </Wrapper>
@@ -56,6 +46,12 @@ const Overlay = styled('div', {
   zIndex: '1',
   transform: 'translateX(-290px)',
   display: 'grid',
+
+  '&.open': {
+    transform: 'translateX(0px)',
+    right: '0',
+    width: 'revert',
+  },
 })
 
 const Wrapper = styled('div', {

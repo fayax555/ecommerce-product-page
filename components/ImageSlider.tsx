@@ -22,8 +22,10 @@ const ImageSlider = ({ isModalOpen, setIsModalOpen }: Props) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') handleLeft()
-      if (e.key === 'ArrowRight') handleRight()
+      if (!isModalOpen) {
+        if (e.key === 'ArrowLeft') handleLeft()
+        if (e.key === 'ArrowRight') handleRight()
+      }
     }
 
     window.addEventListener('keydown', handleKeyDown)
@@ -35,7 +37,7 @@ const ImageSlider = ({ isModalOpen, setIsModalOpen }: Props) => {
     <Wrapper>
       <SlideBoxWrapper ref={ref}>
         <SlideBox
-          style={{
+          css={{
             transform: `translateX(${count * -width}px)`,
             width: `${width * 4}px`,
             left: 0,

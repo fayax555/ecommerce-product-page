@@ -5,10 +5,14 @@ import ProductDetails from 'components/ProductDetails'
 import AddToCart from 'components/AddToCart'
 import { styled } from 'stitches.config'
 import ImageSlider from 'components/ImageSlider'
-import ClientOnlyPortal from 'components/ClientOnlyPortal'
+import ClientOnlyPortal from 'utils/ClientOnlyPortal'
 
 const Home: NextPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  if (isModalOpen) {
+    document.body.style.overflowY = 'hidden'
+  }
 
   return (
     <>
@@ -41,10 +45,14 @@ const Modal = styled('div', {
   backgroundColor: 'rgba(26, 3, 3, 0.5)',
   position: 'fixed',
   inset: '0 0 0 0',
+  overflowY: 'auto',
 
   '& > div': {
+    position: 'absolute',
     width: '500px',
-    margin: 'auto',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%,-50%)',
   },
 })
 
