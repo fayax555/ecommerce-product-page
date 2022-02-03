@@ -23,6 +23,7 @@ export const { getCssText, styled } = createStitches({
       lightGrayishBlue: 'hsl(223, 64%, 98%)',
       white: 'hsl(0, 0%, 100%)',
       black: 'hsl(0, 0%, 0%)',
+      blackA1: 'hsl(0, 0%, 0%, 0.75)',
     },
     fontWeights: {
       light: 400,

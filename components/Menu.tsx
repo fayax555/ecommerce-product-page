@@ -9,24 +9,17 @@ interface MenuProps {
 
 const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const [shouldOpen, setShouldOpen] = useState(false)
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
       if (!wrapperRef.current?.contains(e.target)) setIsMenuOpen(false)
     }
 
-    const handleResize = () => setShouldOpen(window.innerWidth < 800)
-
     window.addEventListener('mousedown', handleClickOutside)
-    window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('mousedown', handleClickOutside)
-      window.removeEventListener('resize', handleResize)
     }
   }, [setIsMenuOpen])
-
-  if (!shouldOpen) return null
 
   return (
     <Overlay className={isMenuOpen ? 'open' : ''}>
@@ -51,6 +44,10 @@ const Overlay = styled('div', {
     transform: 'translateX(0px)',
     right: '0',
     width: 'revert',
+  },
+
+  '@bp1': {
+    display: 'none',
   },
 })
 

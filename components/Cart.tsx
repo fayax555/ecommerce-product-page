@@ -11,7 +11,7 @@ const Cart = () => {
     const handleClickOutside = (e: any) => {
       if (
         !wrapperRef.current?.contains(e.target) &&
-        e.target.className !== 'cart-icon'
+        !e.target.classList.contains('cart-icon')
       ) {
         setIsCartOpen(false)
       }

@@ -25,9 +25,7 @@ const Home: NextPage = () => {
         {isModalOpen && (
           <ClientOnlyPortal selector='#modal'>
             <Modal>
-              <div>
-                <ImageSlider />
-              </div>
+              <ImageSlider isModal={true} {...{ setIsModalOpen }} />
             </Modal>
           </ClientOnlyPortal>
         )}
@@ -42,7 +40,7 @@ const Home: NextPage = () => {
 }
 
 const Modal = styled('div', {
-  backgroundColor: 'rgba(26, 3, 3, 0.5)',
+  backgroundColor: '$blackA1',
   position: 'fixed',
   inset: '0 0 0 0',
   overflowY: 'auto',

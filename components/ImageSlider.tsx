@@ -1,15 +1,18 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react'
+import { useState, useEffect, Dispatch, SetStateAction, useRef } from 'react'
 import { styled } from 'stitches.config'
 import Image from 'next/image'
 import { useMeasure } from 'react-use'
+import { PrevButton, NextButton, CloseIcon } from './SliderButtons'
 
 interface Props {
   isModalOpen?: boolean
-  setIsModalOpen?: Dispatch<SetStateAction<boolean>>
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>
+  isModal: boolean
 }
 
-const ImageSlider = ({ isModalOpen, setIsModalOpen }: Props) => {
+const ImageSlider = ({ isModal, isModalOpen, setIsModalOpen }: Props) => {
   const [ref, { width, height }] = useMeasure<HTMLDivElement>()
+  const wrapperRef = useRef<HTMLDivElement>(null)
   const [count, setCount] = useState(0)
 
   const handleLeft = () => {
@@ -31,11 +34,34 @@ const ImageSlider = ({ isModalOpen, setIsModalOpen }: Props) => {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [width, count])
+  }, [width, count, setIsModalOpen])
+
+  useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      if (isModalOpen) {
+        if (e.target.classList.contains('c-ioGMRi')) {
+          console.log(e.target)
+          setIsModalOpen(false)
+        }
+      }
+    }
+
+    window.addEventListener('mousedown', handleClickOutside)
+
+    return () => window.removeEventListener('mousedown', handleClickOutside)
+  }, [isModalOpen, setIsModalOpen])
 
   return (
-    <Wrapper>
-      <SlideBoxWrapper ref={ref}>
+    <Wrapper ref={wrapperRef}>
+      {/* for desktop modal slider navigation */}
+      {isModal && (
+        <>
+          <CloseIcon {...{ setIsModalOpen }} />
+          <PrevButton {...{ isModal, handleLeft }} />
+          <NextButton {...{ isModal, handleRight }} />
+        </>
+      )}
+      <SlideBoxWrapper className={isModal ? 'modal' : ''} ref={ref}>
         <SlideBox
           css={{
             transform: `translateX(${count * -width}px)`,
@@ -63,28 +89,13 @@ const ImageSlider = ({ isModalOpen, setIsModalOpen }: Props) => {
               </ImageWrapper>
             ))}
         </SlideBox>
-        <Prev onClick={() => handleLeft()}>
-          <svg width='12' height='18' xmlns='http://www.w3.org/2000/svg'>
-            <path
-              d='M11 1 3 9l8 8'
-              stroke='currentColor'
-              strokeWidth='3'
-              fill='none'
-              fillRule='evenodd'
-            />
-          </svg>
-        </Prev>
-        <Next onClick={() => handleRight()}>
-          <svg width='13' height='18' xmlns='http://www.w3.org/2000/svg'>
-            <path
-              d='m2 1 8 8-8 8'
-              stroke='currentColor'
-              strokeWidth='3'
-              fill='none'
-              fillRule='evenodd'
-            />
-          </svg>
-        </Next>
+        {/* for mobile navigation */}
+        {!isModal && (
+          <>
+            <PrevButton {...{ isModal, handleLeft }} />
+            <NextButton {...{ isModal, handleRight }} />
+          </>
+        )}
       </SlideBoxWrapper>
       <ThumbnailListWrapper>
         {Array(4)
@@ -110,6 +121,10 @@ const ImageSlider = ({ isModalOpen, setIsModalOpen }: Props) => {
       </ThumbnailListWrapper>
     </Wrapper>
   )
+}
+
+ImageSlider.defaultProps = {
+  isModal: false,
 }
 
 const Wrapper = styled('div', {})
@@ -148,6 +163,10 @@ const SlideBoxWrapper = styled('div', {
     borderRadius: '10px',
     cursor: 'pointer',
   },
+
+  '&.modal': {
+    cursor: 'revert',
+  },
 })
 
 const SlideBox = styled('div', {
@@ -158,42 +177,6 @@ const SlideBox = styled('div', {
 
 const ImageWrapper = styled('div', {
   position: 'relative',
-})
-
-const Button = styled('button', {
-  transform: 'scale(0.8)',
-  display: 'grid',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '50px',
-  height: '50px',
-  border: 'none',
-  borderRadius: '100%',
-  position: 'absolute',
-  top: '50%',
-  padding: '0.5rem 1rem',
-  cursor: 'pointer',
-  color: '#1D2026',
-
-  '&:hover': {
-    '& > svg': {
-      color: 'orange',
-    },
-  },
-
-  '@bp1': {
-    display: 'none',
-  },
-})
-
-const Prev = styled(Button, {
-  top: '40%',
-  left: '10px',
-})
-
-const Next = styled(Button, {
-  top: '40%',
-  right: '10px',
 })
 
 export default ImageSlider
