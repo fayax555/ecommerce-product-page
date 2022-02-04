@@ -1,4 +1,4 @@
-import { useState, useEffect, Dispatch, SetStateAction, useRef } from 'react'
+import { useState, useEffect, useRef, Dispatch, SetStateAction } from 'react'
 import { styled } from 'stitches.config'
 import Image from 'next/image'
 import { useMeasure } from 'react-use'
@@ -37,13 +37,9 @@ const ImageSlider = ({ isModal, isModalOpen, setIsModalOpen }: Props) => {
   }, [width, count, setIsModalOpen])
 
   useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (isModalOpen) {
-        if (e.target.classList.contains('c-ioGMRi')) {
-          console.log(e.target)
-          setIsModalOpen(false)
-        }
-      }
+    const handleClickOutside = (e: Event) => {
+      if ((e.target as Element).classList.contains('modal-overlay'))
+        setIsModalOpen(false)
     }
 
     window.addEventListener('mousedown', handleClickOutside)
@@ -106,9 +102,8 @@ const ImageSlider = ({ isModal, isModalOpen, setIsModalOpen }: Props) => {
               onClick={() => {
                 setCount(i)
               }}
-              css={{
-                outline: count === i ? '$orange 3px solid' : 'none',
-              }}
+              css={{ opacity: !isModal && count === i ? '0.65' : '1' }}
+              className={count === i ? 'active' : ''}
             >
               <Image
                 layout='fill'
@@ -127,30 +122,9 @@ ImageSlider.defaultProps = {
   isModal: false,
 }
 
-const Wrapper = styled('div', {})
-
-const ThumbnailListWrapper = styled('div', {
-  display: 'none',
-
+const Wrapper = styled('div', {
   '@bp1': {
-    display: 'flex',
-    gap: '5px',
-    justifyContent: 'space-between',
-    paddingTop: '10px',
-  },
-})
-
-const ThumbnailWrapper = styled('div', {
-  position: 'relative',
-  width: '100px',
-  height: '100px',
-  cursor: 'pointer',
-  borderRadius: '11px',
-
-  '& img': {
-    display: 'block',
-    borderRadius: '10px',
-    borderImageWidth: '25px solid #444',
+    width: '445px',
   },
 })
 
@@ -160,8 +134,10 @@ const SlideBoxWrapper = styled('div', {
   position: 'relative',
 
   '@bp1': {
-    borderRadius: '10px',
+    borderRadius: '15px',
     cursor: 'pointer',
+    height: '445px',
+    margin: 'revert',
   },
 
   '&.modal': {
@@ -177,6 +153,57 @@ const SlideBox = styled('div', {
 
 const ImageWrapper = styled('div', {
   position: 'relative',
+})
+
+const ThumbnailListWrapper = styled('div', {
+  display: 'none',
+
+  '@bp1': {
+    display: 'flex',
+    gap: '5px',
+    justifyContent: 'space-between',
+    paddingTop: '32px',
+  },
+})
+
+const ThumbnailWrapper = styled('div', {
+  position: 'relative',
+  width: '88px',
+  height: '88px',
+  cursor: 'pointer',
+  borderRadius: '11px',
+
+  '& img': {
+    display: 'block',
+    borderRadius: '10px',
+    borderImageWidth: '25px solid #444',
+  },
+
+  '&:hover': {
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      background: 'rgba(255, 255, 255, 0.4)',
+      width: '100%',
+      height: '100%',
+      zIndex: '5',
+      borderRadius: '10px',
+    },
+  },
+
+  '&.active': {
+    outline: '$orange 3px solid',
+
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      background: 'rgba(255, 255, 255, 0.65)',
+      width: '100%',
+      height: '100%',
+      zIndex: '1',
+      borderRadius: '10px',
+    },
+  },
 })
 
 export default ImageSlider

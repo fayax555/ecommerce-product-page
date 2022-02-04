@@ -29,6 +29,9 @@ export const { getCssText, styled } = createStitches({
       light: 400,
       bold: 700,
     },
+    sizes: {
+      maxW: '1110px',
+    },
   },
   media: {
     bp1: '(min-width: 800px)',

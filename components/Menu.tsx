@@ -36,7 +36,7 @@ const Overlay = styled('div', {
   backgroundColor: 'hsla(0, 0%, 0%, 0.75)',
   padding: '0 1rem',
   transition: '0.1s ease-in-out',
-  zIndex: '1',
+  zIndex: '10',
   transform: 'translateX(-290px)',
   display: 'grid',
 

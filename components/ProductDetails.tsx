@@ -20,11 +20,20 @@ const ProductDetails = () => (
 const Wrapper = styled('section', {
   padding: '24px',
   paddingBottom: '0',
+
+  '@bp1': {
+    padding: '0',
+  },
 })
 
 const Title = styled('h1', {
-  fontSize: '1.75rem',
   paddingBottom: '10px',
+  fontSize: '1.75rem',
+
+  '@bp1': {
+    fontSize: '2.75rem',
+    lineHeight: '1.1',
+  },
 })
 
 const BrandName = styled('p', {
@@ -33,13 +42,22 @@ const BrandName = styled('p', {
   paddingBottom: '10px',
   fontWeight: '$bold',
   letterSpacing: '0.14em',
+
+  '@bp1': {
+    transform: 'translateY(-10px)',
+    letterSpacing: '0.2em',
+  },
 })
 
 const Text = styled('p', {
   color: '$darkGrayishBlue',
-  fontSize: '15px',
   padding: '5px 0',
   lineHeight: '1.6',
+
+  '@bp1': {
+    fontSize: '1rem',
+    marginTop: '20px',
+  },
 })
 
 const PriceWrapper = styled('div', {
@@ -62,6 +80,12 @@ const PriceWrapper = styled('div', {
     padding: '2px 8px',
     borderRadius: '5px',
     fontSize: '0.8rem',
+    fontWeight: '$bold',
+
+    '@bp1': {
+      fontSize: '1rem',
+      marginLeft: '-5px',
+    },
   },
 
   '& > del': {
@@ -70,6 +94,7 @@ const PriceWrapper = styled('div', {
 
     '@bp1': {
       marginLeft: 'revert',
+      transform: 'translateY(-10px)',
     },
   },
 

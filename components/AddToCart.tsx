@@ -65,13 +65,17 @@ const AddToCart = () => {
 }
 
 const Wrapper = styled('div', {
-  padding: '0 24px',
   marginBottom: '3rem',
   display: 'grid',
   gap: '16px',
+  padding: '0 24px',
 
   '@bp1': {
-    gridTemplateColumns: '1fr 2fr',
+    gap: '15px',
+    gridTemplateColumns: '35% 60%',
+    justifyContent: 'space-around',
+    marginBottom: '0',
+    padding: '0',
   },
 })
 
@@ -90,6 +94,15 @@ const CountWrapper = styled('div', {
     color: '$orange',
     height: '100%',
     cursor: 'pointer',
+    transition: '0.1s ease-in-out',
+
+    '&:first-child': {
+      paddingBottom: '5px',
+    },
+
+    '&:hover': {
+      opacity: '0.6',
+    },
   },
 })
 
@@ -103,10 +116,26 @@ const AddToCartButton = styled('button', {
   borderRadius: '10px',
   textAlign: 'center',
   fontWeight: '$bold',
+  boxShadow: '0px 12px 50px -10px rgba(255, 125, 27, 0.6)',
+  transition: '0.1s ease-in-out',
+
+  '&:hover': {
+    opacity: 0.8,
+  },
+
+  '@bp1': {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
 const CartSvg = styled('svg', {
   transform: 'scale(0.8) translate(-5px, 5px)',
+
+  '@bp1': {
+    transform: 'scale(0.8) translateX(-15px)',
+  },
 })
 
 export default AddToCart

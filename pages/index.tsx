@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import Head from 'next/head'
+import { useState, useEffect } from 'react'
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import ProductDetails from 'components/ProductDetails'
 import AddToCart from 'components/AddToCart'
 import { styled } from 'stitches.config'
@@ -10,9 +10,10 @@ import ClientOnlyPortal from 'utils/ClientOnlyPortal'
 const Home: NextPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  if (isModalOpen) {
-    document.body.style.overflowY = 'hidden'
-  }
+  useEffect(() => {
+    if (isModalOpen) document.body.style.overflowY = 'hidden'
+    if (!isModalOpen) document.body.style.overflowY = 'revert'
+  }, [isModalOpen])
 
   return (
     <>
@@ -24,9 +25,11 @@ const Home: NextPage = () => {
       <Main>
         {isModalOpen && (
           <ClientOnlyPortal selector='#modal'>
-            <Modal>
-              <ImageSlider isModal={true} {...{ setIsModalOpen }} />
-            </Modal>
+            <DesktopOnly>
+              <Modal className='modal-overlay'>
+                <ImageSlider isModal={true} {...{ setIsModalOpen }} />
+              </Modal>
+            </DesktopOnly>
           </ClientOnlyPortal>
         )}
         <ImageSlider {...{ isModalOpen, setIsModalOpen }} />
@@ -39,6 +42,33 @@ const Home: NextPage = () => {
   )
 }
 
+const Main = styled('main', {
+  maxWidth: '800px',
+  margin: 'auto',
+
+  '@bp1': {
+    maxWidth: '1015px',
+    display: 'grid',
+    gap: '65px',
+    gridTemplateColumns: 'minmax(450px, 506px) minmax(auto, 506px)',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '-2px',
+    marginBottom: '60px',
+
+    '& > div': {
+      marginTop: '90px',
+    },
+  },
+})
+
+const DesktopOnly = styled('div', {
+  display: 'none',
+  '@bp1': {
+    display: 'revert',
+  },
+})
+
 const Modal = styled('div', {
   backgroundColor: '$blackA1',
   position: 'fixed',
@@ -50,20 +80,7 @@ const Modal = styled('div', {
     width: '500px',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%,-50%)',
-  },
-})
-
-const Main = styled('main', {
-  maxWidth: '800px',
-  margin: 'auto',
-
-  '@bp1': {
-    maxWidth: '1264px',
-    display: 'grid',
-    gridTemplateColumns: 'minmax(450px, 506px) minmax(auto, 506px)',
-    justifyContent: 'space-between',
-    padding: '56px',
+    transform: 'translate(-50%, -50%)',
   },
 })
 

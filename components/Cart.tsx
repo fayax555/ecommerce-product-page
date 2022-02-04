@@ -94,8 +94,9 @@ const Wrapper = styled('section', {
   },
 
   '@bp1': {
-    maxWidth: '400px',
-    right: 0,
+    width: '360px',
+    top: '95px',
+    right: '0',
     left: 'auto',
   },
 })
@@ -142,7 +143,7 @@ const Content = styled('div', {
 const DeleteSvg = styled('svg', {
   color: '#C3CAD9',
   cursor: 'pointer',
-  transition: '0.3s ease',
+  transition: '0.2s ease',
 
   '&:hover': {
     color: '#a30404',

@@ -60,14 +60,17 @@ const Header = () => {
           />
         </CartIcon>
         {isCartOpen && <Cart />}
-        <Avatar>
+        <MobileAvatar>
           <Image
             src='/images/image-avatar.png'
             alt='avatar'
             width={24}
             height={24}
           />
-        </Avatar>
+        </MobileAvatar>
+        <DesktopAvatar>
+          <Image src='/images/image-avatar.png' alt='avatar' layout='fill' />
+        </DesktopAvatar>
       </ImageWrapper>
     </StyledHeader>
   )
@@ -90,7 +93,10 @@ const StyledHeader = styled('header', {
 
   '@bp1': {
     position: 'relative',
-    maxWidth: '1264px',
+    maxWidth: '$maxW',
+    padding: '0',
+    height: '115px',
+    marginTop: '-3px',
   },
 })
 
@@ -105,7 +111,7 @@ const MenuSvg = styled('svg', {
   position: 'absolute',
   width: '16px',
   cursor: 'pointer',
-  zIndex: '2',
+  zIndex: '10',
   userSelect: 'none',
 
   '@bp1': {
@@ -122,7 +128,7 @@ const Brand = styled('a', {
 
   '@bp1': {
     position: 'revert',
-    transform: 'revert',
+    transform: 'translate(1px, 1px)',
   },
 })
 
@@ -135,14 +141,39 @@ const CartIcon = styled('div', {
   all: 'unset',
   cursor: 'pointer',
   marginRight: '20px',
+
+  '@bp1': {
+    marginRight: '45px',
+    marginTop: '2px',
+  },
 })
 
 const Avatar = styled('div', {
   cursor: 'pointer',
-  borderRadius: '50%',
+  '& > *': {
+    borderRadius: '50%',
+    '&:hover': {
+      outline: '$orange 2px solid',
+    },
+  },
+})
 
-  '&:hover': {
-    outline: '2px solid orange',
+const MobileAvatar = styled(Avatar, {
+  '@bp1': {
+    display: 'none',
+  },
+})
+
+const DesktopAvatar = styled(Avatar, {
+  display: 'none',
+
+  '@bp1': {
+    display: 'revert',
+    position: 'relative',
+    paddingRight: '8px',
+    paddingTop: '3px',
+    height: '50px',
+    width: '50px',
   },
 })
 

@@ -17,6 +17,9 @@ const LinkWrapper = styled('div', {
 
   '@bp1': {
     display: 'flex',
+    fontWeight: 'revert',
+    gap: '32px',
+    marginLeft: '60px',
   },
 })
 
@@ -24,6 +27,21 @@ const Link = styled('a', {
   padding: '0 10px',
   cursor: 'pointer',
   fontSize: '1.125rem',
+  letterSpacing: '0.005em',
+  transition: '0.2s ease',
+
+  '@bp1': {
+    padding: '0',
+    paddingBottom: '45px',
+    paddingTop: '42px',
+    fontSize: '0.95rem',
+    color: '$darkGrayishBlue',
+    '&:hover': {
+      marginBottom: '-4px',
+      borderBottom: '$orange 4px solid',
+      color: '$black',
+    },
+  },
 })
 
 export default NavLinks
