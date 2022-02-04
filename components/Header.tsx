@@ -84,7 +84,7 @@ const StyledHeader = styled('header', {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  borderBottom: '1px solid #ccc',
+  borderBottom: '#eee 1px solid',
   padding: '$outerPadding',
 
   '& > nav': {
