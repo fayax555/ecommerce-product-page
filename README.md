@@ -37,7 +37,7 @@ Mobile
 ### Links
 
 - Solution URL: [repo](https://github.com/fayax555/ecommerce-product-page)
-- Live Site URL: [live](https://ecommerce-product-page.vercel.app/)
+- Live Site URL: [live](https://ecommerce-product-page-liart.vercel.app/)
 
 ## My process
 
