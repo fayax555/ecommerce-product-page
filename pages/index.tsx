@@ -82,6 +82,14 @@ const Modal = styled('div', {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+
+    '@media (max-height: 720px)': {
+      marginTop: '70px',
+    },
+
+    '@media (max-height: 600px)': {
+      marginTop: '100px',
+    },
   },
 })
 
