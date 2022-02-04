@@ -85,8 +85,9 @@ const Button = styled('button', {
 
   '&.modal': {
     display: 'grid',
-    top: '250px',
+    top: '290px',
     zIndex: 5,
+    transform: 'scale(1.1)',
   },
 })
 
@@ -95,7 +96,7 @@ const Prev = styled(Button, {
   left: '10px',
 
   '&.modal': {
-    left: '-20px',
+    left: '-50px',
   },
 })
 
@@ -104,12 +105,12 @@ const Next = styled(Button, {
   right: '10px',
 
   '&.modal': {
-    right: '-20px',
+    right: '-50px',
   },
 })
 
 const CloseSvg = styled('svg', {
-  transform: 'scale(1.2) translate(400px, -5px)',
+  transform: 'scale(1.5) translate(340px, 5px)',
   cursor: 'pointer',
   color: '$white',
   transition: '0.15s ease',

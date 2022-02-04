@@ -7,7 +7,7 @@ import Image from 'next/image'
 import NavLinks from './NavLinks'
 
 const Header = () => {
-  const { isCartOpen, setIsCartOpen } = useCartContext()
+  const { cartQty, isCartOpen, setIsCartOpen } = useCartContext()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
@@ -50,6 +50,7 @@ const Header = () => {
       </nav>
       <ImageWrapper>
         <CartIcon>
+          {cartQty > 0 && <NumberOfItems>{cartQty}</NumberOfItems>}
           <Image
             onClick={() => setIsCartOpen((curr) => !curr)}
             className='cart-icon'
@@ -84,7 +85,7 @@ const StyledHeader = styled('header', {
   justifyContent: 'space-between',
   alignItems: 'center',
   borderBottom: '1px solid #ccc',
-  padding: '0 24px',
+  padding: '$outerPadding',
 
   '& > nav': {
     display: 'flex',
@@ -94,7 +95,6 @@ const StyledHeader = styled('header', {
   '@bp1': {
     position: 'relative',
     maxWidth: '$maxW',
-    padding: '0',
     height: '115px',
     marginTop: '-3px',
   },
@@ -141,11 +141,27 @@ const CartIcon = styled('div', {
   all: 'unset',
   cursor: 'pointer',
   marginRight: '20px',
+  position: 'relative',
 
   '@bp1': {
     marginRight: '45px',
     marginTop: '2px',
   },
+})
+const NumberOfItems = styled('span', {
+  position: 'absolute',
+  color: '$white',
+  backgroundColor: '$orange',
+  height: '15px',
+  width: '20px',
+  top: '-8px',
+  right: '-5px',
+  borderRadius: '10px',
+  textAlign: 'center',
+  fontSize: '0.8rem',
+  zIndex: '5',
+  display: 'grid',
+  placeContent: 'center',
 })
 
 const Avatar = styled('div', {

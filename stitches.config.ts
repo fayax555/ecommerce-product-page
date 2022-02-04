@@ -30,7 +30,10 @@ export const { getCssText, styled } = createStitches({
       bold: 700,
     },
     sizes: {
-      maxW: '1110px',
+      maxW: '1158px',
+    },
+    space: {
+      outerPadding: '0 24px',
     },
   },
   media: {

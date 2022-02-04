@@ -93,7 +93,7 @@ const ImageSlider = ({ isModal, isModalOpen, setIsModalOpen }: Props) => {
           </>
         )}
       </SlideBoxWrapper>
-      <ThumbnailListWrapper>
+      <ThumbnailListWrapper className={isModal ? 'modal' : ''}>
         {Array(4)
           .fill(0)
           .map((_, i) => (
@@ -142,6 +142,10 @@ const SlideBoxWrapper = styled('div', {
 
   '&.modal': {
     cursor: 'revert',
+    height: '550px',
+    width: '550px',
+    marginTop: '28px',
+    marginLeft: '-25px',
   },
 })
 
@@ -163,6 +167,12 @@ const ThumbnailListWrapper = styled('div', {
     gap: '5px',
     justifyContent: 'space-between',
     paddingTop: '32px',
+  },
+
+  '&.modal': {
+    marginTop: '12px',
+    justifyContent: 'center',
+    gap: '30px',
   },
 })
 

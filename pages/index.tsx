@@ -47,7 +47,7 @@ const Main = styled('main', {
   margin: 'auto',
 
   '@bp1': {
-    maxWidth: '1015px',
+    maxWidth: '1063px',
     display: 'grid',
     gap: '65px',
     gridTemplateColumns: 'minmax(450px, 506px) minmax(auto, 506px)',
@@ -55,6 +55,7 @@ const Main = styled('main', {
     alignItems: 'center',
     marginTop: '-2px',
     marginBottom: '60px',
+    padding: '$outerPadding',
 
     '& > div': {
       marginTop: '90px',

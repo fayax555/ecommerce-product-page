@@ -28,7 +28,6 @@ const Link = styled('a', {
   cursor: 'pointer',
   fontSize: '1.125rem',
   letterSpacing: '0.005em',
-  transition: '0.2s ease',
 
   '@bp1': {
     padding: '0',
