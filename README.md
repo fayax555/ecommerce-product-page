@@ -26,7 +26,7 @@ Users should be able to:
 ### Screenshots
 
 Desktop
-<img src="_fem-screenshots/desktop.png" alt="desktop solution screenshot" style="display:block;width:1440px; margin-bottom:10px"/>
+<img src="_fem-screenshots/Desktop.png" alt="desktop solution screenshot" style="display:block;width:1440px; margin-bottom:10px"/>
 <img src="_fem-screenshots/Desktop-modal-open.png" alt="desktop solution screenshot" style="display:block;width:1440px; margin-bottom:10px"/>
 <img src="_fem-screenshots/Desktop-cart-open.png" alt="desktop solution screenshot" style="display:block;width:1440px; margin-bottom:10px"/>
 

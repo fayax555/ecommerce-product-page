@@ -116,6 +116,6 @@ const CloseSvg = styled('svg', {
   transition: '0.15s ease',
 
   '&:hover': {
-    color: '$grayishBlue',
+    color: '$orange',
   },
 })
